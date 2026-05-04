@@ -1,12 +1,14 @@
 import { Routes, Route, NavLink } from "react-router-dom"
+import { BarChart3, Calculator, Home, TrendingUp } from "lucide-react"
+
+import FinKitDemo from "./pages/FinKitDemo"
 import SipCalculator from "./pages/SipCalculator"
 import EmiCalculator from "./pages/EmiCalculator"
 import LumpsumCalculator from "./pages/LumpsumCalculator"
-import { BarChart3, Calculator, TrendingUp } from "lucide-react"
 
 export default function App() {
   const navClass = ({ isActive }) =>
-    `flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition ${
+    `flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap ${
       isActive
         ? "bg-blue-600 text-white"
         : "text-gray-600 hover:bg-gray-100"
@@ -16,7 +18,7 @@ export default function App() {
       {/* Header */}
       <div className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             {/* Left - Logo */}
             <div className="flex items-center gap-3">
               <div className="text-3xl">💰</div>
@@ -31,7 +33,7 @@ export default function App() {
             </div>
 
             {/* Center - Navigation */}
-            <div className="flex items-center gap-2 p-1 rounded-lg bg-gray-100">
+            <div className="flex items-center gap-2 p-1 rounded-lg bg-gray-100 overflow-x-auto">
               <NavLink to="/" className={navClass}>
                 <TrendingUp size={18} />
                 SIP
@@ -46,6 +48,11 @@ export default function App() {
                 <BarChart3 size={18} />
                 Lumpsum
               </NavLink>
+
+              <NavLink to="/demo" className={navClass}>
+                <Home size={18} />
+                Demo
+              </NavLink>
             </div>
           </div>
         </div>
@@ -56,6 +63,7 @@ export default function App() {
         <div className="bg-white rounded-xl shadow-sm p-8 h-full flex flex-col">
           <div className="flex-1 flex flex-col">
             <Routes>
+              <Route path="/demo" element={<FinKitDemo />} />
               <Route path="/" element={<SipCalculator />} />
               <Route path="/emi" element={<EmiCalculator />} />
               <Route path="/lumpsum" element={<LumpsumCalculator />} />
